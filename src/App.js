@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaBriefcase, FaLightbulb, FaCogs, FaChartLine, FaUserTie } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 import './App.css';
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
     patents: useRef(null),
     contact: useRef(null)
   };
+
+  const contactForm = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,6 +74,24 @@ const App = () => {
         staggerChildren: 0.3
       }
     }
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      'patent',
+      'template_gghndlu',
+      contactForm.current,
+      { publicKey: 'ND1i0GDi7B1-jfqYW' }
+    )
+    .then(() => {
+      alert('Message sent successfully!');
+      contactForm.current.reset();
+    }, (error) => {
+      console.log('FAILED...', error.text);
+      alert('Failed to send message, please try again.');
+    });
   };
 
   return (
@@ -383,19 +404,59 @@ const App = () => {
               animate={isVisible.contact ? "visible" : "hidden"}
               variants={fadeInUp}
             >
-              <form>
+              <form ref={contactForm} onSubmit={sendEmail}>
                 <div className="form-group">
-                  <input type="text" placeholder="Your Name" required />
+                  <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Your Name *" 
+                    required 
+                  />
                 </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <input 
+                      type="email" 
+                      name="email" 
+                      placeholder="Email *" 
+                      required 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      placeholder="Phone *" 
+                      required 
+                    />
+                  </div>
+                </div>
+                
                 <div className="form-group">
-                  <input type="email" placeholder="Your Email" required />
+                  <input 
+                    type="text" 
+                    name="subject" 
+                    placeholder="Subject *" 
+                    required 
+                  />
                 </div>
+                
                 <div className="form-group">
-                  <input type="text" placeholder="Subject" />
+                  <textarea 
+                    name="message" 
+                    placeholder="Your Message *" 
+                    rows="5" 
+                    required
+                  ></textarea>
                 </div>
-                <div className="form-group">
-                  <textarea placeholder="Your Message" rows="5" required></textarea>
-                </div>
+                
+                <input 
+                  type="hidden" 
+                  name="time" 
+                  value={new Date().toLocaleString()} 
+                />
+                
                 <motion.button
                   type="submit"
                   className="submit-btn"
