@@ -158,9 +158,6 @@ body {
 }
 
 /* ===== Main Content Styles ===== */
-main {
-  padding-top: 70px;
-}
 
 section {
   padding: 5rem 5%;
@@ -955,4 +952,54 @@ section {
   width: 100%;
   }
   
-  
+  /* General Nav Styles */
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+/* Style for Navigation List */
+.nav-list {
+  display: flex;
+  gap: 10px; /* Creates space between the links */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style for each item in the navigation */
+.nav-item {
+  text-decoration: none;
+  color: #0a2463;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #0a2463; /* Hover color */
+  transform: translateY(-5px); /* Add a subtle hover effect */
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0a2463; /* Add a bottom line effect */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

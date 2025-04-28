@@ -1,0 +1,94 @@
+/* General Reset */
+
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Header Section */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+/* Service Section */
+#services-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+#services-cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.service-card-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 20px);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.service-card-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.service-card-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.service-card-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Button Style */
+.service-card-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.service-card-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .service-card-item {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card-item {
+    width: 100%;
+  }
+}
